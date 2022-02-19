@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nodejs
+  labels:
+    app: nodejs
+spec:
+  volumes:
+  - name: task1-pv-volume
+    persistentVolumeClaim: 
+      claimName: task1-pv-claim
+  containers:
+  - name: nodejs
+    image: galinakaz/nodejs_for_kube_project:1.0 
+    volumeMounts:
+        - mountPath: "/external"
+          name: task1-pv-volume
+    command: ["/bin/sleep", "3650d"]
+    imagePullPolicy: IfNotPresent
+  restartPolicy: Always

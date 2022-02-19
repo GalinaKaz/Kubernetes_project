@@ -1,0 +1,30 @@
+------------kubectl get cm--------------
+NAME               DATA   AGE
+kube-root-ca.crt   1      3d18h
+mysql              2      3d15h
+----------kubectl get pv----------
+NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                   STORAGECLASS   REASON   AGE
+pvc-07309fec-3616-4f5b-989f-a026a75d4c55   10Gi       RWO            Delete           Bound    default/data-mysql-0    standard                3d17h
+pvc-932e6f1c-5847-467b-92e1-d17b0699e3f6   10Gi       RWO            Delete           Bound    default/data-mysql-2    standard                3d12h
+pvc-fc7d2e24-5b6d-4a7e-bde5-55bb9c37611f   10Gi       RWO            Delete           Bound    default/data-mysql-1    standard                3d12h
+task-pv-volume                             1Gi        RWO            Retain           Bound    default/task-pv-claim   manual                  2d
+Name:              pvc-07309fec-3616-4f5b-989f-a026a75d4c55
+Labels:            <none>
+Annotations:       pv.kubernetes.io/provisioned-by: rancher.io/local-path
+Finalizers:        [kubernetes.io/pv-protection]
+StorageClass:      standard
+Status:            Bound
+Claim:             default/data-mysql-0
+Reclaim Policy:    Delete
+Access Modes:      RWO
+VolumeMode:        Filesystem
+Capacity:          10Gi
+Node Affinity:     
+  Required Terms:  
+    Term 0:        kubernetes.io/hostname in [kind-control-plane]
+Message:           
+Source:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/local-path-provisioner/pvc-07309fec-3616-4f5b-989f-a026a75d4c55_default_data-mysql-0
+    HostPathType:  DirectoryOrCreate
+Events:            <none>
