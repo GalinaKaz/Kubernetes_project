@@ -1,5 +1,18 @@
 Prerequisites:
 Kubernetes server installed and configured .
+create external directories , so nodes will access them after creation :
+
+for mysql database: 
+/mnt/data/mysql1  
+/mnt/data/mysql2  
+/mnt/data/mysql3
+
+for ubuntu scripts:
+/mnt/data0
+
+for NodeJS scripts:
+/mnt/data1
+
 
 STEP 1:   -----create MySQL server serction-----
 choose the correct directory 
@@ -19,5 +32,5 @@ use the "nodejs" directory , run all yaml files
 
 
 STEP 4: -----check --------------
-connect to the ubuntu pod that was created all external scripts are located at  /external  ( mounted to /data/mnt0 of the host)
-
+connect to ubuntu pod that was created, all external scripts are located at  /external  ( mounted to /data/mnt0 of the host)
+connect to nodejs pod that was created, all external scripts are located at  /external  ( mounted to /data/mnt1 of the host)
