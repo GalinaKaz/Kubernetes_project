@@ -1,6 +1,6 @@
 Prerequisites:
 Kubernetes server installed and configured .
-create external directories , so nodes will access them after creation :
+create external directories , so podes will access them after creation :
 
 for mysql database: 
 /mnt/data/mysql1  
@@ -9,28 +9,39 @@ for mysql database:
 
 for ubuntu scripts:
 /mnt/data0
+copy all files from  scripts_for_ubuntu to that directory 
 
 for NodeJS scripts:
 /mnt/data1
+copy all files from scripts_for_NodeJS to that directory
 
 
 STEP 1:   -----create MySQL server serction-----
 choose the correct directory 
 for 1 replicatiion use stateful-mysql-only-1-replica-ok directory :
-# kubectl apply  mysql-configmap.yaml  mysql-services.yaml  mysql-statefulset.yaml 
+# kubectl apply  -f mysql-configmap.yaml  
+# kubectl apply  -f mysql-services.yaml  
+# kubectl apply  -f mysql-statefulset.yaml 
  
 for 3 replications ( 1 read-write and 2 read-only) choose  stateful-mysql-3-replica-ok directory:
-# kubectl apply mysql-configmap.yaml  mysql-pv.yaml  mysql-services.yaml  mysql-statefulset.yaml
+# kubectl apply -f mysql-configmap.yaml
+# kubectl apply  -f mysql-pv.yaml  
+# kubectl apply  -f mysql-services.yaml  
+# kubectl apply  -f mysql-statefulset.yaml
 
 STEP 2: ----create ubuntu server with python scripts-----
 use the "ubuntu" directory , run all yaml files 
-# kubectl apply pv-claim.yaml  pv-volume.yaml  ubuntu.yaml
+# kubectl apply -f pv-claim.yaml  
+# kubectl apply -f pv-volume.yaml  
+# kubectl apply -f ubuntu.yaml
 
 STEP 3: ---create NodeJS server-----
 use the "nodejs" directory , run all yaml files 
-# kubectl apply nodejs.yaml  pv-claim1.yaml  pv-volume1.yaml
+# kubectl apply -f pv-claim1.yaml  
+# kubectl apply -f pv-volume1.yaml
+# kubectl apply -f nodejs.yaml  
 
 
 STEP 4: -----check --------------
-connect to ubuntu pod that was created, all external scripts are located at  /external  ( mounted to /data/mnt0 of the host)
-connect to nodejs pod that was created, all external scripts are located at  /external  ( mounted to /data/mnt1 of the host)
+connect to ubuntu pod that was created, all external scripts are located at  /external  ( mounted to /data/mnt0 of the host), try to run the scripts
+connect to nodejs pod that was created, all external scripts are located at  /external  ( mounted to /data/mnt1 of the host), try to run the scripts
